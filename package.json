@@ -1,0 +1,20 @@
+{
+  "name": "always-resolve",
+  "version": "1.0.0",
+  "description": "library for promises that always resolve",
+  "main": "alwaysResolve.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "npm",
+    "promises"
+  ],
+  "author": "FranckEinstein90",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "request": "^2.88.0"
+  }
+}

@@ -24,18 +24,18 @@ describe('basic use case', function() {
             }).finally(done)
     })
 
-    it('but if there\s a problem, it still resolves', function(done){
+    it('but if there\s a problem, it still resolves', function(done) {
 
         let bullShitAddress = "https://ppostman-echi.co/get?foo"
 
-        alwaysResolve( bullShitAddress, {
-                good: x => x, 
+        alwaysResolve(bullShitAddress, {
+                good: x => x,
                 bad: x => 'notOk'
             })
 
-        .then(answer =>{
-            expect(answer).to.equal('notOk')
-        }).finally(done)
+            .then(answer => {
+                expect(answer).to.equal('notOk')
+            }).finally(done)
     })
 })
 
@@ -84,5 +84,21 @@ describe('bad parameter', function() {
             .then(answer => expect(answer).to.equal('bad url'))
     })
 
+})
 
+describe('header', function() {
+    it('...', function(done) {
+        alwaysResolve(
+                "https://restcountries-v1.p.rapidapi.com/capital/paris", {
+                    good: x => JSON.parse(x),
+                    bad: x => x,
+                    headers: {
+                        "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
+                        "x-rapidapi-key": "ac56b39f61msh94657a9e072fd89p1ef653jsn631b4d9bc78b"
+                    }
+                })
+            .then(answer => expect(answer[0].name).to.equal('France'))
+            .finally(done)
+
+    })
 })

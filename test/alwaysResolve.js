@@ -26,24 +26,50 @@ describe('basic use case', function() {
 
     it('but if there\s a problem, it still resolves', function(done) {
 
+        let bullShitAddress = "ifasf"
+
+        alwaysResolve(bullShitAddress, {
+                good: x => x,
+                bad: x => x
+            })
+
+            .then(answer => {
+                expect(answer).to.equal('bad url')
+            }).finally(done)
+    })
+
+    it('but if there\s a problem, it still resolves', function(done) {
+
         let bullShitAddress = "https://ppostman-echi.co/get?foo"
 
         alwaysResolve(bullShitAddress, {
                 good: x => x,
-                bad: x => 'notOk'
+                bad: 'notOk'
             })
 
             .then(answer => {
                 expect(answer).to.equal('notOk')
             }).finally(done)
     })
+
 })
 
 
 
 describe('good parameter', function() {
 
-    it('takes a function labeled as "good" as a parameter', function(done) {
+    it('takes a "good" parameter', function(done) {
+
+        let apiCall = "https://postman-echo.com/get?foo1=bar1&foo2=bar2"
+        alwaysResolve(apiCall, {
+                good: 'ok',
+                bad: x => 'notOk'
+            })
+            .then(answer => expect(answer).to.equal('ok'))
+            .finally(done)
+    })
+
+   it('takes a function labeled as "good" as a parameter', function(done) {
 
         let apiCall = "https://postman-echo.com/get?foo1=bar1&foo2=bar2"
         alwaysResolve(apiCall, {
@@ -75,7 +101,26 @@ describe('bad parameter', function() {
             .then(answer => expect(answer).to.equal('notOk'))
     })
 
-    it('it also takes a bad parameter....', function() {
+    it('which can be a direct value', function(){
+        let apiCall = "https://postman-echo.opm/get?foo1=bar1&foo2=bar2"
+        let prom = alwaysResolve("", {
+                good: x => x,
+                bad: 0 
+            })
+            .then(answer => expect(answer).to.equal(0))
+    })
+
+    it('or a function that takes the return answer as argument', function(done) {
+        let apiCall = "https://postman-echo.com/set?foo"
+        let prom = alwaysResolve(apiCall, {
+                good: x => x,
+                bad: x => x
+            })
+        .then(answer => expect(answer.statusCode).to.equal(404))
+        .finally( done )
+    })
+
+   it('or a function', function() {
         let apiCall = "https://postman-echo.opm/get?foo1=bar1&foo2=bar2"
         let prom = alwaysResolve("", {
                 good: x => x,

@@ -18,28 +18,37 @@ const alwaysResolve = function (apiCall, options = {
         bad, 
         headers
     }) {
+            let bad = (typeof options.bad === 'function')? options.bad : x => options.bad 
+            let good = (typeof options.good === 'function')? options.good : x => options.good
+
             let callOptions = {
                 url: apiCall
             }
+
             if('headers' in options){
                 callOptions.headers = options.headers
             }
 
-            return new Promise((resolve, reject) => {
+            return new Promise( resolve  => {
 
                if(! validator.isURL(apiCall)){
-                 return resolve(options.bad("bad url"))
-               } 
+                 return resolve ( bad('bad url') )
+               }
 
                request(callOptions, function(err, response, body) {
-                    if (err) return resolve(options.bad(err))
 
-                    if ( response && response.statusCode === 200){
-                        return resolve(options.good(body))
-                    } 
-                    else {
-                        return resolve(options.bad('bad response'))
+                    if (err) {
+                        if( typeof options.bad === 'function' ){
+                            return resolve( options.bad( err ) )
+                        }
+                        return resolve( options.bad ) 
                     }
+
+                    if ( response && 'statusCode' in response && response.statusCode === 200){
+                        return resolve( good( body ))
+                    } 
+
+                    return resolve( bad( response ))
                })
             })
         }

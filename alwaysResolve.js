@@ -2,12 +2,8 @@
  * FranckEinstein90 alwaysResolve 2020
  * ------------------------------------------------
  *  single function library alwaysResolve
- *
- *  When I use Promises.all for rest API calls, 
- *  I keep on bumping into use cases
- *  in which i need the promise to resolve 
- *  no matter what, because the flow depends on it
- *
+ *  see vero repository for documentation on this module
+ *  -
  * ***********************************************/
 "use strict"
 const request = require('request')

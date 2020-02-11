@@ -1,6 +1,6 @@
 /******************************************************************************
  * FranckEinstein90
- * 20200000000000000000000000000000
+ * clock package
  *
  *
  * ***************************************************************************/
@@ -51,29 +51,11 @@ clock.Clock.prototype.update = function( appTime ){
 }
 
 clock.Clock.prototype.addEvent = function( event ){
-
-
+    this.events.push(event)
 }
+
 module.exports = {
     clock
 }
 
-class Clock {
-
-    constructor({
-         cout, 
-         events
-     }){
-        this.events = events || []
-        this.cout  = cout
-        this.update = function(){
-            cout('hello')
-        }
-        cout(`clock init with ${this.events.length} events`)
-    }
-
-    start(){
-        this.cout('clock starting')
-    }
-}
 

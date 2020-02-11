@@ -1,4 +1,4 @@
-const alwaysResolve = require('../alwaysResolve').alwaysResolve
+const alwaysResolve = require('../src/promises/alwaysResolve').alwaysResolve
 const expect = require('chai').expect
 const validator = require('validator')
 

@@ -4,7 +4,13 @@
   "description": "library for promises that always resolve",
   "main": "alwaysResolve.js",
   "scripts": {
+    "dev": "nodemon driver.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "_moduleAliases": {
+    "@src"      : "src", 
+    "@events"   : "src/events", 
+    "@time"     : "src/time"
   },
   "keywords": [
     "node",
@@ -15,6 +21,9 @@
   "license": "MIT",
   "dependencies": {
     "chai": "^4.2.0",
+    "module-alias": "^2.2.2",
+    "moment": "^2.24.0",
+    "node-cron": "^2.0.3",
     "request": "^2.88.0",
     "validator": "^12.1.0"
   }

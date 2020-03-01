@@ -117,7 +117,7 @@ describe('bad parameter', function() {
                 bad: x => x
             })
         .then(answer => expect(answer.statusCode).to.equal(404))
-        .finally( done )
+       .finally( done )
     })
 
    it('or a function', function() {

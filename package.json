@@ -8,9 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "_moduleAliases": {
-    "@src"      : "src", 
-    "@events"   : "src/events", 
-    "@time"     : "src/time"
+    "@src": "src",
+    "@events": "src/events",
+    "@time": "src/time"
   },
   "keywords": [
     "node",

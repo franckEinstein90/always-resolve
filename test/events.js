@@ -3,9 +3,9 @@
  * FranckEinstein90
  ********************************************************************/
 
-const expect = require('chai').expect;
-const validator = require('validator');
-const events = require('../src/events').events;
+const expect = require('chai').expect
+const validator = require('validator')
+const events = require('../src/events/events').events
 
 /*************************************************************
  * events.Registrar
@@ -17,20 +17,25 @@ const events = require('../src/events').events;
  * **********************************************************/
 
 
+describe('health check', function() {
+
+    it("events module exists",function(){
+        expect(events).to.not.be.undefined
+    })
+
+    it("can create Event objects", function() {
+        let ev = new events.Event()
+        expect(ev).to.not.be.undefined
+    })
+
+})
 
 describe('events.event Object', function() {
 
 /******************************************************************************
  * construction tests
  ******************************************************************************/
-    it("is created with state 'on' by default", function() {
-        let ev = new events.Event();
-        expect(ev).to.not.be.undefined;
-        expect(ev.state).to.equal(events.eventState.on);
-        expect(ev.isOn).to.equal(true);
-    })
-
-    it("can be created with state 'off' by argument", function() {
+   it("can be created with state 'off' by argument", function() {
         let ev = new events.Event(events.eventState.off);
         expect(ev.isOn).to.equal(false);
         expect(ev.isOff).to.equal(true);

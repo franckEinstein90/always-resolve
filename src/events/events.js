@@ -1,4 +1,4 @@
-/*******************************************************************
+/*******************************************************************************
  * events Module
  * ---------------
  *  events.Event: Include implementations for:
@@ -8,25 +8,22 @@
  *    . can be flipped from one to the other
  *    . has a unique id
  *  
- *  - object events.Chain, implements concept of a chain of events
- *    . sets of events that are linked to one another
- *
- *  - object events.Registrar, a container for objects of type events.Event
- *
- *  ------------
  *  Unit tests: /test/events.js
  *  Dependent modules: /src/calendarEvents.js
  * 
- * *****************************************************************/
+ * ****************************************************************************/
 "use strict"
+/******************************************************************************/
 const uuidv4    = require('uuid/v4')
 /******************************************************************************/
-const events = (function() {
+
+const events = ( function() {
 
 
-    let eventRegistrar = new Map()
+    let _events = new Map()
 
     return {
+
         on          : 1,
         off         : 0,  
 
@@ -46,17 +43,14 @@ const events = (function() {
          *   - a status of on or off
          *
          * **********************************************************/
-        Event: function({
-            state
-        }) { // events.Event registered at construction
+        Event: function( parameters ){  // events.Event registered at construction
 
-            this.id             = uuidv4()
             this.onOffActions   = []
             this.onOnActions    = []
             this.onFlipActions  = []
 
             if (state === undefined) {
-                this.state = events.eventState.on;
+                this.state = eventState.on;
             } else {
                 this.state = state;
             }
@@ -64,34 +58,6 @@ const events = (function() {
             eventRegistrar.set(this.id, this.state);
         },
 
-        /*************************************************************
-         * events.Chain
-         * -------------------
-         *  Structure that links events to each other
-         *  provides facilities to create webs of related 
-         *  events
-         * **********************************************************/
-        Chain: function() {
-            //todo
-        },
-
-        /*************************************************************
-         * events.Registrar
-         * -------------------
-         *  Structure into which events can be registered. Provides
-         *  various operations on the set of registered events, map, 
-         *  filter, reduce
-         * **********************************************************/
-
-        Registrar: function() { // Event registrar
-            this.events = new Map();
-        },
-
-        /*************************************************************
-         * events.Exception
-         * -------------------
-         *  Error Structure 
-         * **********************************************************/
         Exception: function(err) {
 
         }
